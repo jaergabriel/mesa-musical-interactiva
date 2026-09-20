@@ -1,0 +1,4 @@
+"# Archivos que Git debe ignorar" 
+"*.whl" 
+"__pycache__/" 
+"*.pyc" 
