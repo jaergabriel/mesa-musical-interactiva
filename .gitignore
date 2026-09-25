@@ -2,3 +2,4 @@
 "*.whl" 
 "__pycache__/" 
 "*.pyc" 
+"zonas.json" 
