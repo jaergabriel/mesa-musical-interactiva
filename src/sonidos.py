@@ -6,5 +6,6 @@ def cargar_sonido(ruta):
     return pygame.mixer.Sound(ruta)
 
 def reproducir(sonido):
-    if not pygame.mixer.get_busy():
-        sonido.play()
+    canal = pygame.mixer.find_channel(True)
+    if canal:
+        canal.play(sonido)
