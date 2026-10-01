@@ -4,10 +4,10 @@ import numpy as np
 def detectar_laser(frame):
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     
-    # Rangos estrictos: saturación > 200, brillo > 200 (solo el láser)
-    rojo_bajo1 = np.array([0, 200, 200])
+    # Rangos más estrictos: saturación > 220, brillo > 220 (solo el láser)
+    rojo_bajo1 = np.array([0, 220, 220])
     rojo_alto1 = np.array([10, 255, 255])
-    rojo_bajo2 = np.array([170, 200, 200])
+    rojo_bajo2 = np.array([170, 220, 220])
     rojo_alto2 = np.array([180, 255, 255])
     
     mask1 = cv2.inRange(hsv, rojo_bajo1, rojo_alto1)
@@ -22,8 +22,8 @@ def detectar_laser(frame):
     if contornos:
         contorno_mas_grande = max(contornos, key=cv2.contourArea)
         area = cv2.contourArea(contorno_mas_grande)
-        # Solo aceptar si el punto no es ni muy pequeño ni muy grande
-        if 5 < area < 500: 
+        # Aceptamos áreas hasta 800 (para la estela del láser rápido)
+        if 5 < area < 800:
             M = cv2.moments(contorno_mas_grande)
             if M["m00"] != 0:
                 cx = int(M["m10"] / M["m00"])
