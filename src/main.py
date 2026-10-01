@@ -20,8 +20,10 @@ with open("zonas.json", "r") as f:
 
 print(f"Cargadas {len(zonas)} zonas.")
 
-# 3. Cargar sonido (CAMBIA ESTO por el archivo que tengas)
-sonido = cargar_sonido("resources/sounds/C4.mp3")
+# 3. Precargar sonidos (temporal: un solo sonido para todas las zonas)
+# Cuando tengan los sonidos, cambiaremos esto por un mapeo real.
+sonido_prueba = cargar_sonido("resources/sounds/C4.mp3")
+sonidos = [sonido_prueba] * len(zonas)  # Lista con un sonido por zona
 
 # 4. Configurar cámara
 cap = cv2.VideoCapture(0)
@@ -32,7 +34,6 @@ print("Mesa Musical iniciada. Presiona 'q' para salir.")
 
 # 5. Bucle principal
 zona_anterior = -1
-contador = 0
 
 while True:
     ret, frame = cap.read()
@@ -44,16 +45,16 @@ while True:
         cx, cy = pos
         cv2.circle(frame, (cx, cy), 15, (0, 255, 0), 2)
         zona_actual = -1
+        margen = 20  # Tolerancia para que el láser no tenga que entrar completo
         for i, (x, y, w, h) in enumerate(zonas):
-            if x < cx < x + w and y < cy < y + h:
+            if (x - margen) < cx < (x + w + margen) and (y - margen) < cy < (y + h + margen):
                 zona_actual = i
                 cv2.putText(frame, f"Zona {i}", (cx, cy - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), -1)
                 break
 
-        # Solo reproducir si la zona cambió (entrada a nueva zona)
         if zona_actual != -1 and zona_actual != zona_anterior:
-            reproducir(sonido)
+            reproducir(sonidos[zona_actual])
 
         zona_anterior = zona_actual
     else:
@@ -62,8 +63,9 @@ while True:
     for (x, y, w, h) in zonas:
         cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 1)
 
-    cv2.imshow("Mesa Musical", frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+        cv2.imshow("Mesa Musical", frame)
+    key = cv2.waitKey(1) & 0xFF
+    if key == ord('q') or cv2.getWindowProperty("Mesa Musical", cv2.WND_PROP_VISIBLE) < 1:
         break
 
 cap.release()

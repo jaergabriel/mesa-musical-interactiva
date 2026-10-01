@@ -23,7 +23,7 @@ def detectar_laser(frame):
         contorno_mas_grande = max(contornos, key=cv2.contourArea)
         area = cv2.contourArea(contorno_mas_grande)
         # Solo aceptar si el punto no es ni muy pequeño ni muy grande
-        if 5 < area < 200: 
+        if 5 < area < 500: 
             M = cv2.moments(contorno_mas_grande)
             if M["m00"] != 0:
                 cx = int(M["m10"] / M["m00"])
