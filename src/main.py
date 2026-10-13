@@ -28,7 +28,7 @@ sonidos = [sonido_prueba] * len(zonas)  # Lista con un sonido por zona
 # 4. Configurar cámara
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
-cap.set(cv2.CAP_PROP_EXPOSURE, -4)  # Prueba -2, -4, -6
+cap.set(cv2.CAP_PROP_EXPOSURE, -6)  # Prueba -4, -6, -8
 
 print("Mesa Musical iniciada. Presiona 'q' para salir.")
 
