@@ -26,7 +26,7 @@ sonido_prueba = cargar_sonido("resources/sounds/C4.mp3")
 sonidos = [sonido_prueba] * len(zonas)  # Lista con un sonido por zona
 
 # 4. Configurar cámara
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 cap.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.25)
 cap.set(cv2.CAP_PROP_EXPOSURE, -6)  # Prueba -4, -6, -8
 
