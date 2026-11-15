@@ -21,13 +21,12 @@ def dibujar_rectangulo(event, x, y, flags, param):
             zonas.append((min(x1, x2), min(y1, y2), abs(x1 - x2), abs(y1 - y2)))
             puntos = []
 
-# 1. Encender cámara
-cap = cv2.VideoCapture(0)
+# 1. Encender cámara (OJO: AQUÍ PONEMOS LA CÁMARA 1)
+cap = cv2.VideoCapture(1) 
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
-print("Presiona 'c' para capturar la imagen de la mesa. Luego dibuja rectángulos con el mouse.")
-print("Presiona 's' para guardar, 'r' para reiniciar, 'q' para salir.")
+print("Presiona 'c' para capturar la imagen. Presiona 'q' o cierra la ventana para salir.")
 
 while True:
     ret, frame = cap.read()
@@ -35,9 +34,14 @@ while True:
         print("No se pudo acceder a la cámara")
         break
     cv2.imshow("Camara - Presiona 'c' para capturar", frame)
-    if cv2.waitKey(1) & 0xFF == ord('c'):
+    key = cv2.waitKey(1) & 0xFF
+    if key == ord('c'):
         imagen = frame.copy()
         break
+    elif key == ord('q') or cv2.getWindowProperty("Camara - Presiona 'c' para capturar", cv2.WND_PROP_VISIBLE) < 1:
+        cap.release()
+        cv2.destroyAllWindows()
+        exit()
 
 cap.release()
 cv2.destroyAllWindows()
@@ -52,6 +56,7 @@ while True:
         cv2.rectangle(temp, (x, y), (x + w, y + h), (0, 255, 0), 2)
     if len(puntos) > 1:
         cv2.rectangle(temp, puntos[0], puntos[-1], (0, 0, 255), 1)
+    
     cv2.imshow("Calibracion", temp)
     key = cv2.waitKey(1) & 0xFF
 
@@ -64,7 +69,8 @@ while True:
         zonas = []
         puntos = []
         print("Zonas reiniciadas")
-    elif key == ord('q'):
+    elif key == ord('q') or cv2.getWindowProperty("Calibracion", cv2.WND_PROP_VISIBLE) < 1:
+        print("Saliendo sin guardar...")
         break
 
 cv2.destroyAllWindows()

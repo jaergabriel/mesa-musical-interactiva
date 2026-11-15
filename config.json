@@ -1,0 +1,38 @@
+{
+    "bancoA": [
+        "resources/sounds/bancoA/cuerda_do.wav",
+        "resources/sounds/bancoA/cuerda_re.wav",
+        "resources/sounds/bancoA/cuerda_mi.wav",
+        "resources/sounds/bancoA/cuerda_fa.wav",
+        "resources/sounds/bancoA/cuerda_sol.wav",
+        "resources/sounds/bancoA/pad_bombo.wav",
+        "resources/sounds/bancoA/pad_caja.wav",
+        "resources/sounds/bancoA/pad_hihat.wav",
+        "resources/sounds/bancoA/pad_tom.wav",
+        "resources/sounds/bancoA/pad_crash.wav"
+    ],
+    "bancoB": [
+        "resources/sounds/bancoB/cuerda_do_synth.wav",
+        "resources/sounds/bancoB/cuerda_re_synth.wav",
+        "resources/sounds/bancoB/cuerda_mi_synth.wav",
+        "resources/sounds/bancoB/cuerda_fa_synth.wav",
+        "resources/sounds/bancoB/cuerda_sol_synth.wav",
+        "resources/sounds/bancoB/pad_tom_elec.wav",
+        "resources/sounds/bancoB/pad_caja_elec.wav",
+        "resources/sounds/bancoB/pad_hihat_elec.wav",
+        "resources/sounds/bancoB/pad_clap_elec.wav",
+        "resources/sounds/bancoB/pad_clapstick_elec.wav"
+    ],
+    "controles": [
+        "resources/sounds/controles/rec.wav",
+        "resources/sounds/controles/stop.wav",
+        "resources/sounds/controles/del.wav",
+        "resources/sounds/controles/play.wav"
+    ],
+    "plato": [
+        "resources/sounds/efectos_dj/scratch.wav",
+        "resources/sounds/efectos_dj/riser.wav",
+        "resources/sounds/efectos_dj/drop.wav",
+        "resources/sounds/efectos_dj/vinilo.wav"
+    ]
+}
